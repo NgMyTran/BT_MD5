@@ -5,11 +5,12 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import ra.mvc.model.Customer;
-import ra.mvc.repository.ICustomerRepo;
+import ra.mvc.repository.customer.ICustomerRepo;
 
 import java.util.List;
 @Repository
 public class CustomerRepo implements ICustomerRepo {
+
     @PersistenceContext
     private EntityManager entityManager;
     @Override
@@ -36,7 +37,6 @@ public class CustomerRepo implements ICustomerRepo {
             entityManager.merge(cus);
         }
     }
-
     @Override
     public void deleteById(Long id) {
         entityManager.remove(findById(id));

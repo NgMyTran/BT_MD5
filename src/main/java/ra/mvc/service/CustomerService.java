@@ -4,7 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ra.mvc.model.Customer;
-import ra.mvc.repository.ICustomerRepo;
+import ra.mvc.repository.customer.ICustomerRepo;
 
 import java.util.List;
 

@@ -5,9 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import ra.mvc.model.Department;
+import ra.mvc.model.Account;
 import ra.mvc.model.Employee;
-import ra.mvc.service.DepartmentService;
+import ra.mvc.service.AccountService;
 import ra.mvc.service.EmployeeService;
 
 import java.util.List;
@@ -18,16 +18,17 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
-    @Autowired
-    private DepartmentService departmentService;
 
     @GetMapping
     public String listEmployees(Model model) {
         List<Employee> employees = employeeService.findAll();
-        List<Department> departments =departmentService.findAll();
         model.addAttribute("employees", employees);
-        model.addAttribute("departments", departments);
         return "employee/list";
+    }
+    @GetMapping("/delete/{id}")
+    public String deleteEmployee(@PathVariable Integer id) {
+        employeeService.delete(id);
+        return "redirect:/employee";
     }
 
     @GetMapping("/add")

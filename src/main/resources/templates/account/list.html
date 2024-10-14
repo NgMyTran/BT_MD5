@@ -1,0 +1,126 @@
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html lang="en" xmlns:th="http://www.thymeleaf.org">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>Department List</title>&ndash;&gt;-->
+<!--&lt;!&ndash;    &ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;<h1>Department List</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;<a href="/department/add">Add New Department</a>&ndash;&gt;-->
+<!--&lt;!&ndash;<table>&ndash;&gt;-->
+<!--&lt;!&ndash;    <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;        <th>ID</th>&ndash;&gt;-->
+<!--&lt;!&ndash;        <th>Name</th>&ndash;&gt;-->
+<!--&lt;!&ndash;        <th>Status</th>&ndash;&gt;-->
+<!--&lt;!&ndash;        <th>Actions</th>&ndash;&gt;-->
+<!--&lt;!&ndash;    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;    <tr th:each="dept : ${departments}">&ndash;&gt;-->
+<!--&lt;!&ndash;        <td th:text="${dept.id}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td th:text="${dept.name}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td th:text="${dept.status ? 'Active' : 'Inactive'}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <a th:href="@{|/department/edit/${dept.id}|}">Edit</a>&ndash;&gt;-->
+<!--&lt;!&ndash;            <a href="#" th:onclick="'confirmDelete(' + ${dept.id} + ')'">Delete</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </td>&ndash;&gt;-->
+<!--&lt;!&ndash;    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;</table>&ndash;&gt;-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Department List</title>-->
+<!--    <script>-->
+<!--        function confirmDelete(id) {-->
+<!--            if (confirm("Bạn có chắc muốn xóa phòng ban này? Các nhân viên thuộc phòng ban này cũng sẽ bị xóa theo.")) {-->
+<!--                window.location.href = "/department/delete/" + id; // Nếu xác nhận, chuyển hướng đến phương thức delete-->
+<!--            }-->
+<!--        }-->
+<!--    </script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Department List</h1>-->
+<!--<a href="/department/add">Add New Department</a>-->
+<!--<table>-->
+<!--    <tr>-->
+<!--        <th>ID</th>-->
+<!--        <th>Name</th>-->
+<!--        <th>Status</th>-->
+<!--        <th>Actions</th>-->
+<!--    </tr>-->
+<!--    <tr th:each="dept : ${departments}">-->
+<!--        <td th:text="${dept.id}"></td>-->
+<!--        <td th:text="${dept.name}"></td>-->
+<!--        <td th:text="${dept.status ? 'Active' : 'Inactive'}"></td>-->
+<!--        <td>-->
+<!--            <a th:href="@{|/templates/account/edit/${dept.id}|}">Edit</a>-->
+<!--            <a href="#" th:onclick="'confirmDelete(' + ${dept.id} + ')'">Delete</a>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--</table>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh Sách Nhân Viên</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .btn {
+            padding: 5px 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>List Account</h1>
+<a th:href= "@{/employee/add}">Add new</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>FullName</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Birthday</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="account : ${accounts}">
+        <td th:text="${account.accountId}"></td>
+        <td th:text="${account.fullName}"></td>
+        <td th:text="${account.address}"></td>
+        <td th:text="${account.phone}"></td>
+        <td th:text="${account.dob}"></td>
+        <td th:text="${account.status} ? 'Active' : 'Inactive'"></td>
+        <td>
+            <a th:href="@{/account/edit/{accountId}(accountId=${account.accountId})}" class="btn">Chỉnh Sửa</a>
+            <a th:href="@{/account/delete/{accountId}(accountId=${account.accountId})}" class="btn"
+               onclick="return confirm('Bạn có chắc chắn muốn xóa nhân viên này không?')">Xóa</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/account}">Back to list</a>
+</body>
+</html>

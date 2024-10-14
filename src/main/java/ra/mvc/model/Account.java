@@ -1,5 +1,4 @@
 package ra.mvc.model;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,15 +12,14 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "employee")
-public class Employee {
+@Table(name = "account")
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer employeeId;
+    private Integer accountId;
     private String fullName;
-    private String email;
     private String address;
-    private String departmentName;
+    private String phone;
     private LocalDate dob;
     private boolean status;
 }

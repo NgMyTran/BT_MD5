@@ -1,34 +1,43 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Employee List</title>
+    <title>Danh Sách Nhân Viên</title>
 </head>
 <body>
-<h1>Employee List</h1>
-<a href="/employee/add">Add New Employee</a>
+
+<h1>Danh Sách Nhân Viên</h1>
+<a th:href= "@{/employee/add}">Thêm Nhân Viên</a>
 <table>
+    <thead>
     <tr>
         <th>ID</th>
-        <th>Full Name</th>
+        <th>FullName</th>
+        <th>Email</th>
         <th>Address</th>
-        <th>Phone</th>
         <th>Department</th>
+        <th>Birthday</th>
         <th>Status</th>
-        <th>Actions</th>
+        <th>Action</th>
     </tr>
-    <tr th:each="emp : ${employees}">
-        <td th:text="${emp.id}"></td>
-        <td th:text="${emp.fullName}"></td>
-        <td th:text="${emp.address}"></td>
-        <td th:text="${emp.phone}"></td>
-        <td th:text="${emp.department.name}"></td>
-        <td th:text="${emp.status ? 'Active' : 'Inactive'}"></td>
+    </thead>
+    <tbody>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.employeeId}"></td>
+        <td th:text="${employee.fullName}"></td>
+        <td th:text="${employee.email}"></td>
+        <td th:text="${employee.address}"></td>
+        <td th:text="${employee.departmentName}"></td>
+        <td th:text="${employee.dob}"></td>
+        <td th:text="${employee.status} ? 'Active' : 'Inactive'"></td>
         <td>
-            <a th:href="@{|/employee/edit/${emp.id}|}">Edit</a>
-            <a th:href="@{|/employee/toggle/${emp.id}|}" th:text="${emp.status ? 'Deactivate' : 'Activate'}"></a>
+            <a th:href="@{|/employee/edit/${employee.employeeId}|}" class="btn">Edit</a>
+            <a th:href="@{|/employee/delete/{id}(id=${employee.employeeId})|}" class="btn"
+               onclick="return confirm('Bạn có chắc chắn muốn xóa nhân viên này không?')">Delete</a>
         </td>
     </tr>
+    </tbody>
 </table>
+<a th:href="@{/}">Back home</a>
 </body>
 </html>
