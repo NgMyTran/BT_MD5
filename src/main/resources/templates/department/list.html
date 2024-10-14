@@ -1,0 +1,65 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Department List</title>-->
+<!--    -->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Department List</h1>-->
+<!--<a href="/department/add">Add New Department</a>-->
+<!--<table>-->
+<!--    <tr>-->
+<!--        <th>ID</th>-->
+<!--        <th>Name</th>-->
+<!--        <th>Status</th>-->
+<!--        <th>Actions</th>-->
+<!--    </tr>-->
+<!--    <tr th:each="dept : ${departments}">-->
+<!--        <td th:text="${dept.id}"></td>-->
+<!--        <td th:text="${dept.name}"></td>-->
+<!--        <td th:text="${dept.status ? 'Active' : 'Inactive'}"></td>-->
+<!--        <td>-->
+<!--            <a th:href="@{|/department/edit/${dept.id}|}">Edit</a>-->
+<!--            <a href="#" th:onclick="'confirmDelete(' + ${dept.id} + ')'">Delete</a>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--</table>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Department List</title>
+    <script>
+        function confirmDelete(id) {
+            if (confirm("Bạn có chắc muốn xóa phòng ban này? Các nhân viên thuộc phòng ban này cũng sẽ bị xóa theo.")) {
+                window.location.href = "/department/delete/" + id; // Nếu xác nhận, chuyển hướng đến phương thức delete
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>Department List</h1>
+<a href="/department/add">Add New Department</a>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="dept : ${departments}">
+        <td th:text="${dept.id}"></td>
+        <td th:text="${dept.name}"></td>
+        <td th:text="${dept.status ? 'Active' : 'Inactive'}"></td>
+        <td>
+            <a th:href="@{|/department/edit/${dept.id}|}">Edit</a>
+            <a href="#" th:onclick="'confirmDelete(' + ${dept.id} + ')'">Delete</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

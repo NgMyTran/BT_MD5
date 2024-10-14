@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Danh sach </h1>
+<a href="/customer/add">Them moi khach hang</a>
+<table>
+    <tr>
+        <th>STT</th>
+        <th>Name</th>
+        <th>DOB</th>
+        <th colspan="2">Action</th>
+    </tr>
+    <tr th:each="cus,iter: ${customers}">
+        <td th:text="${iter.count}">1</td>
+        <td th:text="${cus.name}">Hung</td>
+        <td th:text="${cus.dob}">11/11/1999</td>
+        <td><a th:href="|/customer/edit/${cus.id}|">Edit</a></td>
+        <td><a onclick="return confirm('Bạn có chắc muốn xóa không?')" th:href="|/customer/delete/${cus.id}|">Delete</a></td>
+    </tr>
+</table>
+</body>
+</html>
