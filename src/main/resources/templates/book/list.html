@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Library</title>
+</head>
+<body>
+<h1>Books</h1>
+<form action="#" method="get">
+    <input type="text" name="search" placeholder="Search..." th:value="${search}"/>
+    <select name="sortBy">
+        <option value="name" th:selected="${sortBy == 'name'}">Sort by Name</option>
+        <option value="price" th:selected="${sortBy == 'price'}">Sort by Price</option>
+        <option value="stock" th:selected="${sortBy == 'stock'}">Sort by Stock</option>
+    </select>
+    <button type="submit">Search</button>
+</form>
+
+<a href="/books/new">Add New Book</a>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.name}"></td>
+        <td th:text="${book.price}"></td>
+        <td th:text="${book.stock}"></td>
+        <td th:text="${book.categoryName}"></td>
+        <td th:text="${book.status}"></td>
+        <td>
+            <a th:href="@{/books/edit/{id}(id=${book.id})}">Edit</a>
+            <a th:href="@{/books/delete/{id}(id=${book.id})}">Delete</a>
+        </td>
+    </tr>
+</table>
+
+<div>
+    <span th:text="'Total Items: ' + ${totalItems}"></span>
+    <div>
+        <a th:href="@{/books(page=${currentPage - 1}, search=${search}, sortBy=${sortBy})}" th:if="${currentPage > 0}">Previous</a>
+        <span th:text="${currentPage + 1} + ' / ' + ${totalPages}"></span>
+        <a th:href="@{/books(page=${currentPage + 1}, search=${search}, sortBy=${sortBy})}" th:if="${currentPage + 1 < totalPages}">Next</a>
+    </div>
+</div>
+</body>
+</html>
