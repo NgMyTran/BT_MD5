@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Department Form</title>
+</head>
+<body>
+<h1>Employee Form</h1>
+<form th:action="@{/department/update}" th:object="${department}" method="post">
+    <div>
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" th:field="*{departmentName}" required/>
+    </div>
+
+    <div>
+        <button type="submit">Save</button>
+    </div>
+</form>
+<a href="/department">Back to Department List</a>
+</body>
+</html>

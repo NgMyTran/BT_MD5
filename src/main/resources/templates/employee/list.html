@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employee Management</title>
+</head>
+<body>
+<h1>Employees</h1>
+<a href="/employee/add">Add Employee</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Date of Birth</th>
+        <th>Department</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.id}"></td>
+        <td th:text="${employee.fullName}"></td>
+        <td th:text="${employee.address}"></td>
+        <td th:text="${employee.phone}"></td>
+        <td th:text="${employee.dateOfBirth}"></td>
+        <th:block th:if="${employee.department.status}">
+            <td th:text="${employee.department.departmentName}"></td>
+        </th:block>
+        <td th:text="${employee.status} ? 'Active' : 'Inactive'"></td>
+        <td>
+            <a th:href="@{/employee/edit/{id}(id=${employee.id})}">Edit</a>
+            <th:block th:if="${employee.status}">
+                <a th:href="@{/employee/delete/{id}(id=${employee.id})}">Delete</a>
+            </th:block>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

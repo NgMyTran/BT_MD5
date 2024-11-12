@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Project Management</title>
+</head>
+<body>
+<h1>Projects</h1>
+<a href="/projects/add">Add Project</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Technology</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Customer</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="project : ${projects}">
+        <td th:text="${project.id}"></td>
+        <td th:text="${project.name}"></td>
+        <td th:text="${project.description}"></td>
+        <td th:text="${project.technology}"></td>
+        <td th:text="${project.startDate}"></td>
+        <td th:text="${project.endDate}"></td>
+        <td th:text="${project.customer.fullName}"></td>
+        <td th:text="${project.status} ? 'Active' : 'Inactive'"></td>
+        <td>
+            <a th:href="@{/projects/edit/{id}(id=${project.id})}">Edit</a>
+            <a th:href="@{/projects/delete/{id}(id=${project.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
