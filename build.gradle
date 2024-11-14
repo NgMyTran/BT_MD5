@@ -24,6 +24,8 @@ repositories {
 }
 
 dependencies {
+    implementation 'com.google.apis:google-api-services-drive:v3-rev20241027-2.0.0'
+    implementation 'com.google.api-client:google-api-client-apache-v5:2.7.0'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'

@@ -1,0 +1,39 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org"-->
+<!--&gt;-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--&lt;!&ndash;<form method="POST" action="/login">&ndash;&gt;-->
+<!--&lt;!&ndash;    <label for="login">Email hoặc Số điện thoại</label>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="text" id="login" name="login" required>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <label for="password">Mật khẩu</label>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="password" id="password" name="password" required>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <button type="submit">Đăng nhập</button>&ndash;&gt;-->
+<!--&lt;!&ndash;</form>&ndash;&gt;-->
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng nhập</title>
+</head>
+<body>
+
+<h2>Đăng nhập</h2>
+<form th:action="@{/login}" method="POST">
+    <label for="login">Email hoặc Số điện thoại</label>
+    <input type="text" id="login" name="login" required />
+
+    <label for="password">Mật khẩu</label>
+    <input type="password" id="password" name="password" required />
+
+    <button type="submit">Đăng nhập</button>
+</form>
+</body>
+</html>

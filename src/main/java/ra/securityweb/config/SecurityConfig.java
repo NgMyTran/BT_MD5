@@ -24,11 +24,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(Customizer.withDefaults())
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/403").permitAll()
-                        .requestMatchers("/user").hasRole("USER")
-                        .anyRequest().authenticated()
+                .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
+                .authorizeHttpRequests(authorize
+                                -> authorize
+//                        .requestMatchers("/403","/upload").permitAll()
+//                        .requestMatchers("/user").hasRole("USER")
+//                        .anyRequest().authenticated() //accept roles USER at hasrole()
+                                .anyRequest().permitAll() //accept all roles
                 )
 //                .exceptionHandling(handler->
 //                        handler.accessDeniedHandler(new AccessDeniedHandlers())
@@ -49,16 +51,30 @@ public AuthenticationManager authenticationManager(
 
     return new ProviderManager(authenticationProvider);
 }
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails userDetails = User.withDefaultPasswordEncoder()
-                .username("user")
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        UserDetails userDetails = User.withDefaultPasswordEncoder()
+//                .username("user")
+//                .password("password")
+//                .roles("USER")
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(userDetails);
+//    }
+@Bean
+public UserDetailsService userDetailsService() {
+        UserDetails userWithEmail= User.withDefaultPasswordEncoder()
+                .username("user@gmail.com")
                 .password("password")
                 .roles("USER")
                 .build();
-
-        return new InMemoryUserDetailsManager(userDetails);
-    }
+        UserDetails userWithPhone = User.withDefaultPasswordEncoder()
+            .username("123456789") // số điện thoại
+            .password("password")
+            .roles("USER")
+            .build();
+        return new InMemoryUserDetailsManager(userWithEmail, userWithPhone);
+}
 
     @Bean
     public PasswordEncoder passwordEncoder() {
