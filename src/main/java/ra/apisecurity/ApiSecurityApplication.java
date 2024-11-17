@@ -34,14 +34,14 @@ public class ApiSecurityApplication {
 //        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 //        return objectMapper;
 //    }
-    @Bean
-    public CommandLineRunner runner(JWTProvider jwtProvider, UserDetailsService userDetailsService){
-       return args -> {
-           UserDetailCustom userDetails = (UserDetailCustom) userDetailsService.loadUserByUsername("hunghx");
-           String token = jwtProvider.generateAccessToken(userDetails);
-           System.out.println("token "+ token);
-
-       };
-    }
+//    @Bean
+//    public CommandLineRunner runner(JWTProvider jwtProvider, UserDetailsService userDetailsService){
+//       return args -> {
+//           UserDetailCustom userDetails = (UserDetailCustom) userDetailsService.loadUserByUsername("hunghx");
+//           String token = jwtProvider.generateAccessToken(userDetails);
+//           System.out.println("token "+ token);
+//
+//       };
+//    }
 
 }

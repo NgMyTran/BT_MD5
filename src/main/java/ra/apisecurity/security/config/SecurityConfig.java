@@ -26,7 +26,7 @@ public class SecurityConfig {
     private UserDetailsService userDetailsService;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
-        http.cors(AbstractHttpConfigurer::disable) // chia se tài nguyên tái các đường dẫn nào
+        http.cors(AbstractHttpConfigurer::disable) // share tài nguyên ở các đường dẫn nào
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         request-> request.requestMatchers("/public/**").permitAll() // coong khai
@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .sessionManagement(session ->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthTokenFilter, UsernamePasswordAuthenticationFilter.class)
 
-        ; // phaan quyeenf theo dduwowngf daanx
+        ; // phân quyền theo đường dẫn
         return http.build();
     }
     @Bean
